@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Hydra Portugal — Referências</title>
+<style>
+:root{
+  --navy:#0B1B2B;--ciano:#4ABFCC;--verde:#22CC88;--dourado:#C9A84C;
+  --vm:#E05050;--bg:#F0F2F6;--sf:#FFFFFF;--txt:#1A2A3A;--mut:#6B7A8D;
+  --brd:#E4E8EE;--fn:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --rad:12px;--rad-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);font-family:var(--fn);color:var(--txt)}
+.hdr{background:var(--navy)}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.hdr-title{font-size:14px;font-weight:700;color:var(--ciano)}
+.hdr-sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px}
+.grad{height:3px;background:linear-gradient(90deg,#7B6FFF,#4ABFCC,#22CC88,#C9A84C)}
+.badge-count{background:rgba(74,191,204,.15);color:var(--ciano);border:1px solid rgba(74,191,204,.3);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.tabs{display:flex;background:rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.08)}
+.tab{flex:1;text-align:center;padding:11px 4px;font-size:10px;font-weight:600;color:rgba(255,255,255,.4);cursor:pointer;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid transparent;transition:all .15s}
+.tab.active{color:var(--ciano);border-bottom-color:var(--ciano)}
+.wrap{max-width:520px;margin:0 auto;padding:14px 14px 100px}
+.sec{display:none}.sec.active{display:block;animation:fi .2s ease}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1}}
+.card{background:var(--sf);border-radius:var(--rad);border:1px solid var(--brd);padding:14px;margin-bottom:12px}
+.card-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:10px}
+.card-ciano{background:linear-gradient(135deg,rgba(74,191,204,.08),rgba(74,191,204,.02));border-color:rgba(74,191,204,.2)}
+.card-ciano .card-title{color:var(--ciano)}
+.field{margin-bottom:10px}
+.field label{display:block;font-size:11px;font-weight:600;color:var(--mut);margin-bottom:4px}
+.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid var(--brd);border-radius:var(--rad-sm);background:var(--sf);color:var(--txt);font-size:14px;font-family:var(--fn);-webkit-appearance:none;appearance:none}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--ciano);box-shadow:0 0 0 3px rgba(74,191,204,.12)}
+.field textarea{resize:vertical;min-height:60px;font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+/* Resultado */
+.resultado-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px}
+.res-opt{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--brd);border-radius:var(--rad-sm);cursor:pointer;font-size:13px;font-weight:600;color:var(--mut);transition:all .15s}
+.res-opt.active-venda{border-color:var(--verde);background:rgba(34,204,136,.08);color:var(--txt)}
+.res-opt.active-dnv{border-color:var(--dourado);background:rgba(201,168,76,.08);color:var(--txt)}
+/* Botões */
+.btn{width:100%;padding:13px;border:none;border-radius:var(--rad-sm);font-size:14px;font-weight:700;font-family:var(--fn);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .15s}
+.btn:active{transform:scale(.97)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-ciano{background:var(--ciano);color:#fff}
+.btn-verde{background:var(--verde);color:#fff}
+.btn-outline{background:transparent;border:1.5px solid var(--brd);color:var(--txt)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+/* Lista */
+.ref-item{background:var(--sf);border:1px solid var(--brd);border-radius:var(--rad-sm);padding:12px 14px;margin-bottom:6px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+.ref-nome{font-weight:700;font-size:13px}
+.ref-detalhe{font-size:11px;color:var(--mut);margin-top:3px;line-height:1.5}
+.btn-edit{background:rgba(74,191,204,.08);border:1px solid rgba(74,191,204,.2);color:var(--ciano);font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;cursor:pointer}
+.btn-del{background:rgba(224,80,80,.08);border:none;color:var(--vm);font-size:20px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+/* Totais */
+.totais{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.tot{background:var(--sf);border-radius:var(--rad-sm);padding:10px 8px;text-align:center;border:1px solid var(--brd)}
+.tot-v{font-size:22px;font-weight:800}
+.tot-l{font-size:9px;color:var(--mut);margin-top:2px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+/* Estado envio */
+.envio-estado{border-radius:var(--rad-sm);padding:12px 14px;margin-bottom:10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px}
+.envio-ok{background:rgba(34,204,136,.08);border:1px solid rgba(34,204,136,.2);color:#0A7040}
+.envio-err{background:rgba(224,80,80,.08);border:1px solid rgba(224,80,80,.2);color:#CC2222}
+.envio-loading{background:rgba(74,191,204,.08);border:1px solid rgba(74,191,204,.2);color:#0A6070}
+.spin{display:inline-block;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* Config URL */
+.url-card{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.2);border-radius:var(--rad-sm);padding:12px;margin-bottom:12px;font-size:12px;color:#B85C00}
+.url-card strong{display:block;margin-bottom:4px}
+/* Empty */
+.empty{text-align:center;padding:28px 16px;color:var(--mut);font-size:13px}
+.empty-icon{font-size:32px;margin-bottom:8px}
+/* Bottom */
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;padding:10px 14px 20px;background:var(--bg);border-top:1px solid var(--brd)}
+.bottom-bar-inner{max-width:520px;margin:0 auto}
+.flash{animation:fl .35s ease}
+@keyframes fl{0%,100%{opacity:1}50%{opacity:.4}}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-top">
+    <div>
+      <div class="hdr-title">HYDRA PORTUGAL</div>
+      <div class="hdr-sub">Registo de Referências</div>
+    </div>
+    <span class="badge-count" id="badge">0 refs</span>
+  </div>
+  <div class="tabs">
+    <div class="tab active" onclick="goTab('registar',this)">Registar</div>
+    <div class="tab" onclick="goTab('lista',this)">Lista</div>
+    <div class="tab" onclick="goTab('enviar',this)">Enviar 📤</div>
+  </div>
+  <div class="grad"></div>
+</div>
+
+<div class="wrap">
+
+<!-- ══════════ REGISTAR ══════════ -->
+<div id="sec-registar" class="sec active">
+
+  <!-- Identificação -->
+  <div class="card">
+    <div class="card-title">Identificação</div>
+    <div class="grid2">
+      <div class="field">
+        <label>Comercial</label>
+        <input type="text" id="comercial" placeholder="Teu nome">
+      </div>
+      <div class="field">
+        <label>Balcão</label>
+        <select id="balcao">
+          <option value="Setúbal">Setúbal</option>
+          <option value="Lisboa">Lisboa</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="field">
+        <label>Data da demo</label>
+        <input type="date" id="data-demo">
+      </div>
+      <div class="field">
+        <label>Nome do cliente</label>
+        <input type="text" id="nome-cliente" placeholder="Cliente visitado">
+      </div>
+    </div>
+    <div class="field">
+      <label>Resultado da demo</label>
+      <div class="resultado-opts">
+        <div class="res-opt" id="opt-venda" onclick="setRes('Venda')">
+          <span id="ico-v">⬜</span> Venda
+        </div>
+        <div class="res-opt" id="opt-dnv" onclick="setRes('DNV')">
+          <span id="ico-d">⬜</span> DNV
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Localização cliente -->
+  <div class="card card-ciano">
+    <div class="card-title">📍 Localização e perfil do cliente</div>
+    <div class="grid2">
+      <div class="field">
+        <label>Localidade</label>
+        <input type="text" id="loc-cliente" placeholder="ex: Setúbal">
+      </div>
+      <div class="field">
+        <label>Código Postal</label>
+        <input type="text" id="cp-cliente" placeholder="ex: 2900-000" inputmode="numeric">
+      </div>
+    </div>
+    <div class="field">
+      <label>Profissão do cliente</label>
+      <input type="text" id="prof-cliente" placeholder="ex: Enfermeiro/a, Empresário/a...">
+    </div>
+  </div>
+
+  <!-- Nova referência -->
+  <div class="card">
+    <div class="card-title">Nova Referência</div>
+    <div class="field">
+      <label>Nome completo *</label>
+      <input type="text" id="ref-nome" placeholder="Nome da referência" autocomplete="off">
+    </div>
+    <div class="grid2">
+      <div class="field">
+        <label>Telefone *</label>
+        <input type="tel" id="ref-tel" placeholder="9XX XXX XXX" inputmode="tel">
+      </div>
+      <div class="field">
+        <label>Idade</label>
+        <input type="number" id="ref-idade" placeholder="ex: 45" inputmode="numeric" min="18" max="99">
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="field">
+        <label>Relação com o cliente</label>
+        <select id="ref-relacao">
+          <option value="">— seleccionar —</option>
+          <option>Familiar</option>
+          <option>Amigo/a</option>
+          <option>Vizinho/a</option>
+          <option>Colega trabalho</option>
+          <option>Outro</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Profissão</label>
+        <input type="text" id="ref-profissao" placeholder="ex: Enfermeiro/a">
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="field">
+        <label>Localidade</label>
+        <input type="text" id="ref-localidade" placeholder="ex: Palmela">
+      </div>
+      <div class="field">
+        <label>Código Postal</label>
+        <input type="text" id="ref-cp" placeholder="ex: 2950-000" inputmode="numeric">
+      </div>
+    </div>
+    <div class="field">
+      <label>Patologias / Interesse</label>
+      <input type="text" id="ref-patologias" placeholder="ex: diabetes, calcário...">
+    </div>
+    <div class="field">
+      <label>Observações</label>
+      <textarea id="ref-obs" placeholder="Notas relevantes para o contacto..."></textarea>
+    </div>
+  </div>
+
+</div><!-- /registar -->
+
+
+<!-- ══════════ LISTA ══════════ -->
+<div id="sec-lista" class="sec">
+  <div class="totais" id="totais-bloco" style="display:none">
+    <div class="tot"><div class="tot-v" id="tot-n">0</div><div class="tot-l">Refs</div></div>
+    <div class="tot"><div class="tot-v" id="tot-c" style="font-size:14px">—</div><div class="tot-l">Comercial</div></div>
+    <div class="tot"><div class="tot-v" id="tot-d" style="font-size:14px">—</div><div class="tot-l">Data</div></div>
+  </div>
+  <div id="lista-refs">
+    <div class="empty"><div class="empty-icon">📋</div>Sem referências ainda.</div>
+  </div>
+</div>
+
+
+<!-- ══════════ ENVIAR ══════════ -->
+<div id="sec-enviar" class="sec">
+
+  <!-- URL do script -->
+  <div class="card">
+    <div class="card-title">⚙️ Configuração (fazer uma vez)</div>
+    <div class="field">
+      <label>URL do Power Automate</label>
+      <input type="url" id="script-url" placeholder="https://flow.microsoft.com/macros/s/..." 
+             oninput="guardarUrl()" style="font-size:11px">
+    </div>
+    <div id="url-status" style="font-size:11px;color:var(--mut);margin-top:4px"></div>
+  </div>
+
+  <!-- Estado do envio -->
+  <div id="envio-estado" style="display:none"></div>
+
+  <!-- Resumo -->
+  <div class="card" id="resumo-card" style="display:none">
+    <div class="card-title">Pronto para enviar</div>
+    <div id="resumo-conteudo" style="font-size:13px;color:var(--txt);line-height:1.8"></div>
+  </div>
+
+  <!-- Botões de envio -->
+  <button class="btn btn-verde" id="btn-enviar" onclick="enviarParaSheets()" style="display:none;margin-bottom:8px">
+    🚀 Enviar para OneDrive
+  </button>
+
+  <!-- Fallback exportação manual -->
+  <div class="card" style="margin-top:8px">
+    <div class="card-title">📥 Exportação manual (alternativa)</div>
+    <div style="font-size:12px;color:var(--mut);margin-bottom:12px;line-height:1.5">
+      Se preferires enviar por WhatsApp, descarrega os ficheiros e envia à supervisora.
+    </div>
+    <button class="btn btn-outline" onclick="exportarExcel()" style="margin-bottom:8px">
+      📊 Excel (.xls)
+    </button>
+    <button class="btn btn-outline" onclick="exportarCSV()">
+      📄 CSV
+    </button>
+  </div>
+
+</div><!-- /enviar -->
+
+</div><!-- /wrap -->
+
+<!-- BOTÃO FIXO -->
+<div class="bottom-bar" id="bottom-bar">
+  <div class="bottom-bar-inner">
+    <button class="btn btn-navy" onclick="addRef()">
+      ＋ Guardar Referência
+    </button>
+  </div>
+</div>
+
+<script>
+// ── CONFIG ────────────────────────────────────────────────────
+// Cola aqui o URL do teu Power Automate (ou deixa vazio para configurar na app)
+let SCRIPT_URL = localStorage.getItem('hydra_pa_url') || '';
+
+// ── ESTADO ────────────────────────────────────────────────────
+let refs = JSON.parse(localStorage.getItem('hydra_refs_od') || '[]');
+let nextId = (refs.length > 0 ? Math.max(...refs.map(r=>r.id)) + 1 : 1);
+let editId = null;
+let resultado = '';
+
+// Init
+document.getElementById('data-demo').value = new Date().toISOString().split('T')[0];
+updateBadge();
+
+// ── TABS ─────────────────────────────────────────────────────
+function goTab(id, el) {
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  el.classList.add('active');
+  document.getElementById('bottom-bar').style.display = id==='registar' ? 'block' : 'none';
+  if(id==='lista') renderLista();
+  if(id==='enviar') renderEnviar();
+}
+
+// ── RESULTADO ────────────────────────────────────────────────
+function setRes(val) {
+  resultado = val;
+  document.getElementById('opt-venda').className = 'res-opt' + (val==='Venda' ? ' active-venda' : '');
+  document.getElementById('opt-dnv').className   = 'res-opt' + (val==='DNV'   ? ' active-dnv'   : '');
+  document.getElementById('ico-v').textContent = val==='Venda' ? '✅' : '⬜';
+  document.getElementById('ico-d').textContent = val==='DNV'   ? '🟡' : '⬜';
+}
+
+// ── ADICIONAR REFERÊNCIA ─────────────────────────────────────
+function addRef() {
+  const nome = document.getElementById('ref-nome').value.trim();
+  const tel  = document.getElementById('ref-tel').value.trim();
+  if(!nome){ erro('ref-nome'); return; }
+  if(!tel){  erro('ref-tel');  return; }
+
+  const obj = {
+    id: editId || nextId++,
+    resultado,
+    comercial:    v('comercial')    || '—',
+    balcao:       document.getElementById('balcao').value,
+    data_demo:    v('data-demo'),
+    nome_cliente:  v('nome-cliente'),
+    loc_cliente:   v('loc-cliente'),
+    cp_cliente:    v('cp-cliente'),
+    prof_cliente:  v('prof-cliente'),
+    nome, telefone: tel,
+    idade:        v('ref-idade'),
+    relacao:      document.getElementById('ref-relacao').value,
+    profissao:    v('ref-profissao'),
+    localidade:   v('ref-localidade'),
+    cp:           v('ref-cp'),
+    patologias:   v('ref-patologias'),
+    obs:          document.getElementById('ref-obs').value.trim(),
+    ts:           new Date().toISOString(),
+  };
+
+  if(editId) { refs = refs.map(r=>r.id===editId ? obj : r); editId=null; }
+  else refs.push(obj);
+
+  guardarLocal();
+  limpar();
+  updateBadge();
+  flash('ref-nome');
+}
+
+function v(id){ return document.getElementById(id).value.trim(); }
+function erro(id){
+  const el=document.getElementById(id);
+  el.style.borderColor='#E05050'; el.style.boxShadow='0 0 0 3px rgba(224,80,80,.12)';
+  el.focus(); setTimeout(()=>{el.style.borderColor='';el.style.boxShadow='';},1500);
+}
+function flash(id){
+  const el=document.getElementById(id);
+  el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'),350);
+}
+function limpar(){
+  ['ref-nome','ref-tel','ref-idade','ref-profissao','ref-localidade','ref-cp','ref-patologias'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('ref-obs').value='';
+  document.getElementById('ref-relacao').value='';
+}
+
+// ── LOCAL STORAGE ────────────────────────────────────────────
+function guardarLocal(){ localStorage.setItem('hydra_refs_od', JSON.stringify(refs)); }
+
+
+// ── BADGE ────────────────────────────────────────────────────
+function updateBadge(){
+  const n=refs.length;
+  document.getElementById('badge').textContent=n+' ref'+(n!==1?'s':'');
+}
+
+// ── LISTA ────────────────────────────────────────────────────
+function renderLista(){
+  const lista=document.getElementById('lista-refs');
+  const tot=document.getElementById('totais-bloco');
+  const n=refs.length;
+  if(n===0){ lista.innerHTML='<div class="empty"><div class="empty-icon">📋</div>Sem referências ainda.</div>'; tot.style.display='none'; return; }
+  tot.style.display='grid';
+  const ul=refs[refs.length-1];
+  document.getElementById('tot-n').textContent=n;
+  document.getElementById('tot-c').textContent=(ul.comercial||'—').split(' ')[0];
+  document.getElementById('tot-d').textContent=ul.data_demo?fmtData(ul.data_demo):'—';
+  lista.innerHTML=refs.map(r=>{
+    const rcor=r.resultado==='Venda'?'#22CC88':r.resultado==='DNV'?'#C9A84C':'#6B7A8D';
+    const rtxt=r.resultado||'';
+    return `<div class="ref-item">
+      <div>
+        <div class="ref-nome">${r.nome}</div>
+        <div class="ref-detalhe">
+          ${rtxt?`<span style="font-weight:700;color:${rcor}">${rtxt}</span> · `:''}${r.telefone}${r.localidade?' · '+r.localidade:''}${r.relacao?' · '+r.relacao:''}
+        </div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button class="btn-edit" onclick="editRef(${r.id})">Editar</button>
+        <button class="btn-del" onclick="delRef(${r.id})">×</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function editRef(id){
+  const r=refs.find(x=>x.id===id); if(!r) return;
+  editId=id;
+  document.getElementById('comercial').value=r.comercial==='—'?'':r.comercial;
+  document.getElementById('balcao').value=r.balcao;
+  document.getElementById('data-demo').value=r.data_demo;
+  document.getElementById('nome-cliente').value=r.nome_cliente;
+  document.getElementById('loc-cliente').value=r.loc_cliente;
+  document.getElementById('cp-cliente').value=r.cp_cliente;
+  document.getElementById('prof-cliente').value=r.prof_cliente||'';
+  document.getElementById('ref-nome').value=r.nome;
+  document.getElementById('ref-tel').value=r.telefone;
+  document.getElementById('ref-idade').value=r.idade;
+  document.getElementById('ref-relacao').value=r.relacao;
+  document.getElementById('ref-profissao').value=r.profissao;
+  document.getElementById('ref-localidade').value=r.localidade;
+  document.getElementById('ref-cp').value=r.cp;
+  document.getElementById('ref-patologias').value=r.patologias;
+  document.getElementById('ref-obs').value=r.obs;
+  setRes(r.resultado||'');
+  goTab('registar',document.querySelector('.tab'));
+  window.scrollTo(0,300);
+}
+
+function delRef(id){
+  if(confirm('Apagar esta referência?')){ refs=refs.filter(r=>r.id!==id); guardarLocal(); updateBadge(); renderLista(); }
+}
+
+// ── ENVIAR PARA GOOGLE SHEETS ────────────────────────────────
+function renderEnviar(){
+  const n=refs.length;
+  const resumo=document.getElementById('resumo-card');
+  const btnWA=document.getElementById('btn-whatsapp');
+  const cardExp=document.getElementById('card-export');
+  const emptyDiv=document.getElementById('empty-enviar');
+  if(n===0){
+    resumo.style.display='none'; btnWA.style.display='none';
+    cardExp.style.display='none'; emptyDiv.style.display='block'; return;
+  }
+  emptyDiv.style.display='none';
+  resumo.style.display='block'; btnWA.style.display='flex'; cardExp.style.display='block';
+  const ul=refs[refs.length-1];
+  const vendas=refs.filter(r=>r.resultado==='Venda').length;
+  const dnv=refs.filter(r=>r.resultado==='DNV').length;
+  document.getElementById('resumo-conteudo').innerHTML=`
+    <div>👤 <strong>${ul.comercial}</strong> · ${ul.balcao}</div>
+    <div>📅 Demo ${ul.data_demo?fmtData(ul.data_demo):'—'} · <strong>${ul.nome_cliente||'—'}</strong></div>
+    <div>📋 <strong>${n}</strong> referência${n!==1?'s':''} a enviar</div>
+    ${vendas>0?`<div style="color:#0A7040;font-weight:700">✅ ${vendas} de venda</div>`:''}
+    ${dnv>0?`<div style="color:#B85C00;font-weight:700">🟡 ${dnv} de DNV</div>`:''}
+  `;
+}
+
+function enviarWhatsApp(){
+  if(!refs.length){ alert('Sem referências para enviar.'); return; }
+  const ul=refs[0];
+  let msg = '🔵 *HYDRA PORTUGAL — REFERÊNCIAS*\n';
+  msg += '━━━━━━━━━━━━━━━━\n';
+  msg += `👤 *Comercial:* ${ul.comercial} · ${ul.balcao}\n`;
+  msg += `📅 *Demo:* ${ul.data_demo?fmtData(ul.data_demo):'—'} · ${ul.resultado||'—'}\n`;
+  msg += `🏠 *Cliente:* ${ul.nome_cliente||'—'}${ul.loc_cliente?' ('+ul.loc_cliente+')':''}${ul.prof_cliente?' · '+ul.prof_cliente:''}\n`;
+  msg += `📋 *Total:* ${refs.length} referência${refs.length!==1?'s':''}\n`;
+  msg += '━━━━━━━━━━━━━━━━\n\n';
+  refs.forEach((r,i)=>{
+    msg += `*REF ${i+1}*\n`;
+    msg += `👤 ${r.nome}\n`;
+    msg += `📞 ${r.telefone}\n`;
+    if(r.relacao) msg += `🔗 ${r.relacao}\n`;
+    if(r.localidade) msg += `📍 ${r.localidade}${r.cp?' ('+r.cp+')':''}\n`;
+    if(r.idade) msg += `🎂 ${r.idade} anos\n`;
+    if(r.profissao) msg += `💼 ${r.profissao}\n`;
+    if(r.patologias) msg += `⚕️ ${r.patologias}\n`;
+    if(r.obs) msg += `💬 ${r.obs}\n`;
+    msg += '\n';
+  });
+  const url = 'https://wa.me/' + NUM_SUPERVISORA + '?text=' + encodeURIComponent(msg);
+  window.open(url, '_blank');
+}
+
+async function enviarParaSheets(){
+  if(!SCRIPT_URL){ alert('Configura o URL do Power Automate primeiro.'); return; }
+  if(refs.length===0){ alert('Sem referências para enviar.'); return; }
+
+  const btn=document.getElementById('btn-enviar');
+  const estado=document.getElementById('envio-estado');
+  btn.disabled=true;
+  btn.innerHTML='<span class="spin">⟳</span> A enviar...';
+  estado.style.display='flex';
+  estado.className='envio-estado envio-loading';
+  estado.innerHTML='<span class="spin">⟳</span> A enviar para o OneDrive...';
+
+  const payload = {
+    id_envio: Date.now().toString()+Math.random().toString(36).slice(2),
+    refs: refs
+  };
+
+  try {
+    const r = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors', // Power Automate não devolve CORS — usamos no-cors
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    // Com no-cors não conseguimos ler a resposta — assumimos sucesso se não houve erro de rede
+    estado.className='envio-estado envio-ok';
+    estado.innerHTML=`✅ ${refs.length} referência${refs.length!==1?'s':''} enviada${refs.length!==1?'s':''} para o OneDrive!`;
+
+    // Limpar refs após envio bem sucedido
+    setTimeout(()=>{
+      if(confirm('Referências enviadas com sucesso!\n\nLimpar a lista para o próximo cliente?')){
+        refs=[]; guardarLocal(); updateBadge(); renderEnviar();
+        estado.style.display='none';
+      }
+    }, 1200);
+
+  } catch(err) {
+    estado.className='envio-estado envio-err';
+    estado.innerHTML='❌ Erro de rede. Verifica a ligação e tenta de novo.';
+  }
+
+  btn.disabled=false;
+  btn.innerHTML='🚀 Enviar para OneDrive';
+}
+
+// ── EXPORTAÇÃO MANUAL (FALLBACK) ──────────────────────────────
+const COLS=['resultado','comercial','balcao','data_demo','nome_cliente','loc_cliente','cp_cliente','prof_cliente','nome','telefone','idade','relacao','profissao','localidade','cp','patologias','obs'];
+const LABELS=['Resultado Demo','Comercial','Balcão','Data Demo','Nome Cliente','Localidade Cliente','CP Cliente','Profissão Cliente','Nome Referência','Telefone','Idade','Relação','Profissão Ref.','Localidade Ref.','CP Ref.','Patologias','Observações'];
+
+function exportarCSV(){
+  if(!refs.length){ alert('Sem referências para exportar.'); return; }
+  let csv='\uFEFF'+LABELS.join(';')+'\r\n';
+  refs.forEach(r=>{ csv+=COLS.map(c=>'"'+(r[c]||'').replace(/"/g,'""')+'"').join(';')+'\r\n'; });
+  dl(prefixo()+'_referencias.csv', new Blob([csv],{type:'text/csv;charset=utf-8'}));
+}
+
+function exportarExcel(){
+  if(!refs.length){ alert('Sem referências para exportar.'); return; }
+  let xml=`<?xml version="1.0" encoding="UTF-8"?><?mso-application progid="Excel.Sheet"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Styles><Style ss:ID="h"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#0B1B2B" ss:Pattern="Solid"/></Style><Style ss:ID="a"><Interior ss:Color="#EAF4F8" ss:Pattern="Solid"/></Style></Styles><Worksheet ss:Name="Referências"><Table>`;
+  xml+=`<Row>`; LABELS.forEach(l=>{ xml+=`<Cell ss:StyleID="h"><Data ss:Type="String">${esc(l)}</Data></Cell>`; }); xml+=`</Row>`;
+  refs.forEach((r,i)=>{ xml+=`<Row${i%2===1?' ss:StyleID="a"':''}>`;COLS.forEach(c=>{xml+=`<Cell><Data ss:Type="String">${esc(r[c]||'')}</Data></Cell>`;}); xml+=`</Row>`; });
+  xml+=`</Table></Worksheet></Workbook>`;
+  dl(prefixo()+'_referencias.xls', new Blob([xml],{type:'application/vnd.ms-excel;charset=utf-8'}));
+}
+
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function prefixo(){ const d=refs.length>0?refs[0].data_demo:new Date().toISOString().split('T')[0]; const c=refs.length>0?refs[0].comercial.split(' ')[0]:'ref'; return d.replace(/-/g,'')+'-'+c; }
+function dl(nome,blob){ const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=nome;a.click();URL.revokeObjectURL(u); }
+function fmtData(s){ if(!s)return'—'; const[y,m,d]=s.split('-');return d+'/'+m; }
+
+// Enter shortcuts
+document.getElementById('ref-nome').addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventDefault();document.getElementById('ref-tel').focus();}});
+document.getElementById('ref-tel').addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventDefault();addRef();}});
+</script>
+</body>
+</html>
