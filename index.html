@@ -2,16 +2,14 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Hydra Refs">
-  <meta name="application-name" content="Hydra Refs">
-  <meta name="theme-color" content="#0B1B2B">
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="icon.png">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>Hydra Portugal — Referências</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Referências">
+<meta name="theme-color" content="#0B1B2B">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B1B2B'/%3E%3Ctext x='50' y='66' font-size='54' text-anchor='middle' fill='%234ABFCC' font-family='Arial' font-weight='bold'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B1B2B'/%3E%3Ctext x='50' y='66' font-size='54' text-anchor='middle' fill='%234ABFCC' font-family='Arial' font-weight='bold'%3EH%3C/text%3E%3C/svg%3E">
 <style>
 :root{
   --navy:#0B1B2B;--ciano:#4ABFCC;--verde:#22CC88;--dourado:#C9A84C;
@@ -43,12 +41,10 @@ html,body{background:var(--bg);font-family:var(--fn);color:var(--txt)}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--ciano);box-shadow:0 0 0 3px rgba(74,191,204,.12)}
 .field textarea{resize:vertical;min-height:60px;font-size:13px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-/* Resultado */
 .resultado-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px}
 .res-opt{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--brd);border-radius:var(--rad-sm);cursor:pointer;font-size:13px;font-weight:600;color:var(--mut);transition:all .15s}
 .res-opt.active-venda{border-color:var(--verde);background:rgba(34,204,136,.08);color:var(--txt)}
 .res-opt.active-dnv{border-color:var(--dourado);background:rgba(201,168,76,.08);color:var(--txt)}
-/* Botões */
 .btn{width:100%;padding:13px;border:none;border-radius:var(--rad-sm);font-size:14px;font-weight:700;font-family:var(--fn);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .15s}
 .btn:active{transform:scale(.97)}
 .btn-navy{background:var(--navy);color:#fff}
@@ -56,31 +52,23 @@ html,body{background:var(--bg);font-family:var(--fn);color:var(--txt)}
 .btn-verde{background:var(--verde);color:#fff}
 .btn-outline{background:transparent;border:1.5px solid var(--brd);color:var(--txt)}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-/* Lista */
 .ref-item{background:var(--sf);border:1px solid var(--brd);border-radius:var(--rad-sm);padding:12px 14px;margin-bottom:6px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
 .ref-nome{font-weight:700;font-size:13px}
 .ref-detalhe{font-size:11px;color:var(--mut);margin-top:3px;line-height:1.5}
 .btn-edit{background:rgba(74,191,204,.08);border:1px solid rgba(74,191,204,.2);color:var(--ciano);font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;cursor:pointer}
 .btn-del{background:rgba(224,80,80,.08);border:none;color:var(--vm);font-size:20px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
-/* Totais */
 .totais{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
 .tot{background:var(--sf);border-radius:var(--rad-sm);padding:10px 8px;text-align:center;border:1px solid var(--brd)}
 .tot-v{font-size:22px;font-weight:800}
 .tot-l{font-size:9px;color:var(--mut);margin-top:2px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
-/* Estado envio */
 .envio-estado{border-radius:var(--rad-sm);padding:12px 14px;margin-bottom:10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px}
 .envio-ok{background:rgba(34,204,136,.08);border:1px solid rgba(34,204,136,.2);color:#0A7040}
 .envio-err{background:rgba(224,80,80,.08);border:1px solid rgba(224,80,80,.2);color:#CC2222}
 .envio-loading{background:rgba(74,191,204,.08);border:1px solid rgba(74,191,204,.2);color:#0A6070}
 .spin{display:inline-block;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-/* Config URL */
-.url-card{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.2);border-radius:var(--rad-sm);padding:12px;margin-bottom:12px;font-size:12px;color:#B85C00}
-.url-card strong{display:block;margin-bottom:4px}
-/* Empty */
 .empty{text-align:center;padding:28px 16px;color:var(--mut);font-size:13px}
 .empty-icon{font-size:32px;margin-bottom:8px}
-/* Bottom */
 .bottom-bar{position:fixed;bottom:0;left:0;right:0;padding:10px 14px 20px;background:var(--bg);border-top:1px solid var(--brd)}
 .bottom-bar-inner{max-width:520px;margin:0 auto}
 .flash{animation:fl .35s ease}
@@ -100,215 +88,118 @@ html,body{background:var(--bg);font-family:var(--fn);color:var(--txt)}
   <div class="tabs">
     <div class="tab active" onclick="goTab('registar',this)">Registar</div>
     <div class="tab" onclick="goTab('lista',this)">Lista</div>
-    <div class="tab" onclick="goTab('enviar',this)">Enviar 📤</div>
+    <div class="tab" onclick="goTab('enviar',this)">Enviar</div>
   </div>
   <div class="grad"></div>
 </div>
 
 <div class="wrap">
 
-<!-- ══════════ REGISTAR ══════════ -->
 <div id="sec-registar" class="sec active">
-
-  <!-- Identificação -->
   <div class="card">
     <div class="card-title">Identificação</div>
     <div class="grid2">
-      <div class="field">
-        <label>Comercial</label>
-        <input type="text" id="comercial" placeholder="Teu nome">
-      </div>
-      <div class="field">
-        <label>Balcão</label>
-        <select id="balcao">
-          <option value="Setúbal">Setúbal</option>
-          <option value="Lisboa">Lisboa</option>
-        </select>
+      <div class="field"><label>Comercial</label><input type="text" id="comercial" placeholder="Teu nome"></div>
+      <div class="field"><label>Balcão</label>
+        <select id="balcao"><option value="Setúbal">Setúbal</option><option value="Lisboa">Lisboa</option></select>
       </div>
     </div>
     <div class="grid2">
-      <div class="field">
-        <label>Data da demo</label>
-        <input type="date" id="data-demo">
-      </div>
-      <div class="field">
-        <label>Nome do cliente</label>
-        <input type="text" id="nome-cliente" placeholder="Cliente visitado">
-      </div>
+      <div class="field"><label>Data da demo</label><input type="date" id="data-demo"></div>
+      <div class="field"><label>Nome do cliente</label><input type="text" id="nome-cliente" placeholder="Cliente visitado"></div>
     </div>
     <div class="field">
       <label>Resultado da demo</label>
       <div class="resultado-opts">
-        <div class="res-opt" id="opt-venda" onclick="setRes('Venda')">
-          <span id="ico-v">⬜</span> Venda
-        </div>
-        <div class="res-opt" id="opt-dnv" onclick="setRes('DNV')">
-          <span id="ico-d">⬜</span> DNV
-        </div>
+        <div class="res-opt" id="opt-venda" onclick="setRes('Venda')"><span id="ico-v">⬜</span> Venda</div>
+        <div class="res-opt" id="opt-dnv" onclick="setRes('DNV')"><span id="ico-d">⬜</span> DNV</div>
       </div>
     </div>
   </div>
 
-  <!-- Localização cliente -->
   <div class="card card-ciano">
-    <div class="card-title">📍 Localização e perfil do cliente</div>
+    <div class="card-title">📍 Localização do cliente</div>
     <div class="grid2">
-      <div class="field">
-        <label>Localidade</label>
-        <input type="text" id="loc-cliente" placeholder="ex: Setúbal">
-      </div>
-      <div class="field">
-        <label>Código Postal</label>
-        <input type="text" id="cp-cliente" placeholder="ex: 2900-000" inputmode="numeric">
-      </div>
-    </div>
-    <div class="field">
-      <label>Profissão do cliente</label>
-      <input type="text" id="prof-cliente" placeholder="ex: Enfermeiro/a, Empresário/a...">
+      <div class="field"><label>Localidade</label><input type="text" id="loc-cliente" placeholder="ex: Setúbal"></div>
+      <div class="field"><label>Código Postal</label><input type="text" id="cp-cliente" placeholder="ex: 2900-000"></div>
     </div>
   </div>
 
-  <!-- Nova referência -->
   <div class="card">
     <div class="card-title">Nova Referência</div>
-    <div class="field">
-      <label>Nome completo *</label>
-      <input type="text" id="ref-nome" placeholder="Nome da referência" autocomplete="off">
+    <div class="field"><label>Nome completo *</label><input type="text" id="ref-nome" placeholder="Nome da referência" autocomplete="off"></div>
+    <div class="grid2">
+      <div class="field"><label>Telefone *</label><input type="tel" id="ref-tel" placeholder="9XX XXX XXX" inputmode="tel"></div>
+      <div class="field"><label>Idade</label><input type="number" id="ref-idade" placeholder="ex: 45" inputmode="numeric" min="18" max="99"></div>
     </div>
     <div class="grid2">
-      <div class="field">
-        <label>Telefone *</label>
-        <input type="tel" id="ref-tel" placeholder="9XX XXX XXX" inputmode="tel">
-      </div>
-      <div class="field">
-        <label>Idade</label>
-        <input type="number" id="ref-idade" placeholder="ex: 45" inputmode="numeric" min="18" max="99">
-      </div>
-    </div>
-    <div class="grid2">
-      <div class="field">
-        <label>Relação com o cliente</label>
+      <div class="field"><label>Relação com o cliente</label>
         <select id="ref-relacao">
           <option value="">— seleccionar —</option>
-          <option>Familiar</option>
-          <option>Amigo/a</option>
-          <option>Vizinho/a</option>
-          <option>Colega trabalho</option>
-          <option>Outro</option>
+          <option>Familiar</option><option>Amigo/a</option><option>Vizinho/a</option><option>Colega trabalho</option><option>Outro</option>
         </select>
       </div>
-      <div class="field">
-        <label>Profissão</label>
-        <input type="text" id="ref-profissao" placeholder="ex: Enfermeiro/a">
-      </div>
+      <div class="field"><label>Profissão</label><input type="text" id="ref-profissao" placeholder="ex: Enfermeiro/a"></div>
     </div>
     <div class="grid2">
-      <div class="field">
-        <label>Localidade</label>
-        <input type="text" id="ref-localidade" placeholder="ex: Palmela">
-      </div>
-      <div class="field">
-        <label>Código Postal</label>
-        <input type="text" id="ref-cp" placeholder="ex: 2950-000" inputmode="numeric">
-      </div>
+      <div class="field"><label>Localidade</label><input type="text" id="ref-localidade" placeholder="ex: Palmela"></div>
+      <div class="field"><label>Código Postal</label><input type="text" id="ref-cp" placeholder="ex: 2950-000"></div>
     </div>
-    <div class="field">
-      <label>Patologias / Interesse</label>
-      <input type="text" id="ref-patologias" placeholder="ex: diabetes, calcário...">
-    </div>
-    <div class="field">
-      <label>Observações</label>
-      <textarea id="ref-obs" placeholder="Notas relevantes para o contacto..."></textarea>
-    </div>
+    <div class="field"><label>Patologias / Interesse</label><input type="text" id="ref-patologias" placeholder="ex: diabetes, calcário..."></div>
+    <div class="field"><label>Observações</label><textarea id="ref-obs" placeholder="Notas relevantes para o contacto..."></textarea></div>
   </div>
+</div>
 
-</div><!-- /registar -->
-
-
-<!-- ══════════ LISTA ══════════ -->
 <div id="sec-lista" class="sec">
   <div class="totais" id="totais-bloco" style="display:none">
     <div class="tot"><div class="tot-v" id="tot-n">0</div><div class="tot-l">Refs</div></div>
     <div class="tot"><div class="tot-v" id="tot-c" style="font-size:14px">—</div><div class="tot-l">Comercial</div></div>
     <div class="tot"><div class="tot-v" id="tot-d" style="font-size:14px">—</div><div class="tot-l">Data</div></div>
   </div>
-  <div id="lista-refs">
-    <div class="empty"><div class="empty-icon">📋</div>Sem referências ainda.</div>
-  </div>
+  <div id="lista-refs"><div class="empty"><div class="empty-icon">📋</div>Sem referências ainda.</div></div>
 </div>
 
-
-<!-- ══════════ ENVIAR ══════════ -->
 <div id="sec-enviar" class="sec">
 
-  <!-- URL do script -->
-  <div class="card">
-    <div class="card-title">⚙️ Configuração (fazer uma vez)</div>
-    <div class="field">
-      <label>URL do Power Automate</label>
-      <input type="url" id="script-url" placeholder="https://flow.microsoft.com/macros/s/..." 
-             oninput="guardarUrl()" style="font-size:11px">
-    </div>
-    <div id="url-status" style="font-size:11px;color:var(--mut);margin-top:4px"></div>
-  </div>
-
-  <!-- Estado do envio -->
   <div id="envio-estado" style="display:none"></div>
 
-  <!-- Resumo -->
   <div class="card" id="resumo-card" style="display:none">
     <div class="card-title">Pronto para enviar</div>
     <div id="resumo-conteudo" style="font-size:13px;color:var(--txt);line-height:1.8"></div>
   </div>
 
-  <!-- Botões de envio -->
   <button class="btn btn-verde" id="btn-enviar" onclick="enviarParaSheets()" style="display:none;margin-bottom:8px">
-    🚀 Enviar para OneDrive
+    🚀 Enviar para Google Sheets
   </button>
 
-  <!-- Fallback exportação manual -->
   <div class="card" style="margin-top:8px">
-    <div class="card-title">📥 Exportação manual (alternativa)</div>
-    <div style="font-size:12px;color:var(--mut);margin-bottom:12px;line-height:1.5">
-      Se preferires enviar por WhatsApp, descarrega os ficheiros e envia à supervisora.
-    </div>
-    <button class="btn btn-outline" onclick="exportarExcel()" style="margin-bottom:8px">
-      📊 Excel (.xls)
-    </button>
-    <button class="btn btn-outline" onclick="exportarCSV()">
-      📄 CSV
-    </button>
+    <div class="card-title">📥 Exportação manual</div>
+    <button class="btn btn-outline" onclick="exportarExcel()" style="margin-bottom:8px">📊 Excel (.xls)</button>
+    <button class="btn btn-outline" onclick="exportarCSV()">📄 CSV</button>
   </div>
 
-</div><!-- /enviar -->
+</div>
 
-</div><!-- /wrap -->
+</div>
 
-<!-- BOTÃO FIXO -->
 <div class="bottom-bar" id="bottom-bar">
   <div class="bottom-bar-inner">
-    <button class="btn btn-navy" onclick="addRef()">
-      ＋ Guardar Referência
-    </button>
+    <button class="btn btn-navy" onclick="addRef()">＋ Guardar Referência</button>
   </div>
 </div>
 
 <script>
-// ── CONFIG ────────────────────────────────────────────────────
-// Cola aqui o URL do teu Power Automate (ou deixa vazio para configurar na app)
-let SCRIPT_URL = localStorage.getItem('hydra_pa_url') || '';
+// URL fixo do Google Apps Script — configurado uma vez, invisível para os comerciais
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxb50ZBt64KxgHGvUkj2H1OMHTWwguj8aJM4ntAPLaa7qqtnhRukAqCFb1rzvfTqYv3/exec';
 
-// ── ESTADO ────────────────────────────────────────────────────
-let refs = JSON.parse(localStorage.getItem('hydra_refs_od') || '[]');
+let refs = JSON.parse(localStorage.getItem('hydra_refs') || '[]');
 let nextId = (refs.length > 0 ? Math.max(...refs.map(r=>r.id)) + 1 : 1);
 let editId = null;
 let resultado = '';
 
-// Init
 document.getElementById('data-demo').value = new Date().toISOString().split('T')[0];
 updateBadge();
 
-// ── TABS ─────────────────────────────────────────────────────
 function goTab(id, el) {
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -319,7 +210,6 @@ function goTab(id, el) {
   if(id==='enviar') renderEnviar();
 }
 
-// ── RESULTADO ────────────────────────────────────────────────
 function setRes(val) {
   resultado = val;
   document.getElementById('opt-venda').className = 'res-opt' + (val==='Venda' ? ' active-venda' : '');
@@ -328,7 +218,6 @@ function setRes(val) {
   document.getElementById('ico-d').textContent = val==='DNV'   ? '🟡' : '⬜';
 }
 
-// ── ADICIONAR REFERÊNCIA ─────────────────────────────────────
 function addRef() {
   const nome = document.getElementById('ref-nome').value.trim();
   const tel  = document.getElementById('ref-tel').value.trim();
@@ -341,10 +230,9 @@ function addRef() {
     comercial:    v('comercial')    || '—',
     balcao:       document.getElementById('balcao').value,
     data_demo:    v('data-demo'),
-    nome_cliente:  v('nome-cliente'),
-    loc_cliente:   v('loc-cliente'),
-    cp_cliente:    v('cp-cliente'),
-    prof_cliente:  v('prof-cliente'),
+    nome_cliente: v('nome-cliente'),
+    loc_cliente:  v('loc-cliente'),
+    cp_cliente:   v('cp-cliente'),
     nome, telefone: tel,
     idade:        v('ref-idade'),
     relacao:      document.getElementById('ref-relacao').value,
@@ -381,17 +269,13 @@ function limpar(){
   document.getElementById('ref-relacao').value='';
 }
 
-// ── LOCAL STORAGE ────────────────────────────────────────────
-function guardarLocal(){ localStorage.setItem('hydra_refs_od', JSON.stringify(refs)); }
+function guardarLocal(){ localStorage.setItem('hydra_refs', JSON.stringify(refs)); }
 
-
-// ── BADGE ────────────────────────────────────────────────────
 function updateBadge(){
   const n=refs.length;
   document.getElementById('badge').textContent=n+' ref'+(n!==1?'s':'');
 }
 
-// ── LISTA ────────────────────────────────────────────────────
 function renderLista(){
   const lista=document.getElementById('lista-refs');
   const tot=document.getElementById('totais-bloco');
@@ -429,7 +313,6 @@ function editRef(id){
   document.getElementById('nome-cliente').value=r.nome_cliente;
   document.getElementById('loc-cliente').value=r.loc_cliente;
   document.getElementById('cp-cliente').value=r.cp_cliente;
-  document.getElementById('prof-cliente').value=r.prof_cliente||'';
   document.getElementById('ref-nome').value=r.nome;
   document.getElementById('ref-tel').value=r.telefone;
   document.getElementById('ref-idade').value=r.idade;
@@ -448,59 +331,26 @@ function delRef(id){
   if(confirm('Apagar esta referência?')){ refs=refs.filter(r=>r.id!==id); guardarLocal(); updateBadge(); renderLista(); }
 }
 
-// ── ENVIAR PARA GOOGLE SHEETS ────────────────────────────────
 function renderEnviar(){
   const n=refs.length;
   const resumo=document.getElementById('resumo-card');
-  const btnWA=document.getElementById('btn-whatsapp');
-  const cardExp=document.getElementById('card-export');
-  const emptyDiv=document.getElementById('empty-enviar');
-  if(n===0){
-    resumo.style.display='none'; btnWA.style.display='none';
-    cardExp.style.display='none'; emptyDiv.style.display='block'; return;
-  }
-  emptyDiv.style.display='none';
-  resumo.style.display='block'; btnWA.style.display='flex'; cardExp.style.display='block';
+  const btnEnv=document.getElementById('btn-enviar');
+  if(n===0){ resumo.style.display='none'; btnEnv.style.display='none'; return; }
+  resumo.style.display='block';
+  btnEnv.style.display='flex';
   const ul=refs[refs.length-1];
   const vendas=refs.filter(r=>r.resultado==='Venda').length;
   const dnv=refs.filter(r=>r.resultado==='DNV').length;
   document.getElementById('resumo-conteudo').innerHTML=`
     <div>👤 <strong>${ul.comercial}</strong> · ${ul.balcao}</div>
-    <div>📅 Demo ${ul.data_demo?fmtData(ul.data_demo):'—'} · <strong>${ul.nome_cliente||'—'}</strong></div>
-    <div>📋 <strong>${n}</strong> referência${n!==1?'s':''} a enviar</div>
-    ${vendas>0?`<div style="color:#0A7040;font-weight:700">✅ ${vendas} de venda</div>`:''}
-    ${dnv>0?`<div style="color:#B85C00;font-weight:700">🟡 ${dnv} de DNV</div>`:''}
+    <div>📅 Demo de ${ul.data_demo?fmtData(ul.data_demo):'—'} · <strong>${ul.nome_cliente||'—'}</strong></div>
+    <div>📋 <strong>${n}</strong> referência${n!==1?'s':''} para enviar</div>
+    ${vendas>0?`<div>✅ ${vendas} de venda</div>`:''}
+    ${dnv>0?`<div>🟡 ${dnv} de DNV</div>`:''}
   `;
 }
 
-function enviarWhatsApp(){
-  if(!refs.length){ alert('Sem referências para enviar.'); return; }
-  const ul=refs[0];
-  let msg = '🔵 *HYDRA PORTUGAL — REFERÊNCIAS*\n';
-  msg += '━━━━━━━━━━━━━━━━\n';
-  msg += `👤 *Comercial:* ${ul.comercial} · ${ul.balcao}\n`;
-  msg += `📅 *Demo:* ${ul.data_demo?fmtData(ul.data_demo):'—'} · ${ul.resultado||'—'}\n`;
-  msg += `🏠 *Cliente:* ${ul.nome_cliente||'—'}${ul.loc_cliente?' ('+ul.loc_cliente+')':''}${ul.prof_cliente?' · '+ul.prof_cliente:''}\n`;
-  msg += `📋 *Total:* ${refs.length} referência${refs.length!==1?'s':''}\n`;
-  msg += '━━━━━━━━━━━━━━━━\n\n';
-  refs.forEach((r,i)=>{
-    msg += `*REF ${i+1}*\n`;
-    msg += `👤 ${r.nome}\n`;
-    msg += `📞 ${r.telefone}\n`;
-    if(r.relacao) msg += `🔗 ${r.relacao}\n`;
-    if(r.localidade) msg += `📍 ${r.localidade}${r.cp?' ('+r.cp+')':''}\n`;
-    if(r.idade) msg += `🎂 ${r.idade} anos\n`;
-    if(r.profissao) msg += `💼 ${r.profissao}\n`;
-    if(r.patologias) msg += `⚕️ ${r.patologias}\n`;
-    if(r.obs) msg += `💬 ${r.obs}\n`;
-    msg += '\n';
-  });
-  const url = 'https://wa.me/' + NUM_SUPERVISORA + '?text=' + encodeURIComponent(msg);
-  window.open(url, '_blank');
-}
-
 async function enviarParaSheets(){
-  if(!SCRIPT_URL){ alert('Configura o URL do Power Automate primeiro.'); return; }
   if(refs.length===0){ alert('Sem referências para enviar.'); return; }
 
   const btn=document.getElementById('btn-enviar');
@@ -509,7 +359,7 @@ async function enviarParaSheets(){
   btn.innerHTML='<span class="spin">⟳</span> A enviar...';
   estado.style.display='flex';
   estado.className='envio-estado envio-loading';
-  estado.innerHTML='<span class="spin">⟳</span> A enviar para o OneDrive...';
+  estado.innerHTML='<span class="spin">⟳</span> A enviar para o Google Sheets...';
 
   const payload = {
     id_envio: Date.now().toString()+Math.random().toString(36).slice(2),
@@ -517,18 +367,16 @@ async function enviarParaSheets(){
   };
 
   try {
-    const r = await fetch(SCRIPT_URL, {
+    await fetch(SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors', // Power Automate não devolve CORS — usamos no-cors
+      mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
 
-    // Com no-cors não conseguimos ler a resposta — assumimos sucesso se não houve erro de rede
     estado.className='envio-estado envio-ok';
-    estado.innerHTML=`✅ ${refs.length} referência${refs.length!==1?'s':''} enviada${refs.length!==1?'s':''} para o OneDrive!`;
+    estado.innerHTML=`✅ ${refs.length} referência${refs.length!==1?'s':''} enviada${refs.length!==1?'s':''} para o Google Sheets!`;
 
-    // Limpar refs após envio bem sucedido
     setTimeout(()=>{
       if(confirm('Referências enviadas com sucesso!\n\nLimpar a lista para o próximo cliente?')){
         refs=[]; guardarLocal(); updateBadge(); renderEnviar();
@@ -542,12 +390,11 @@ async function enviarParaSheets(){
   }
 
   btn.disabled=false;
-  btn.innerHTML='🚀 Enviar para OneDrive';
+  btn.innerHTML='🚀 Enviar para Google Sheets';
 }
 
-// ── EXPORTAÇÃO MANUAL (FALLBACK) ──────────────────────────────
-const COLS=['resultado','comercial','balcao','data_demo','nome_cliente','loc_cliente','cp_cliente','prof_cliente','nome','telefone','idade','relacao','profissao','localidade','cp','patologias','obs'];
-const LABELS=['Resultado Demo','Comercial','Balcão','Data Demo','Nome Cliente','Localidade Cliente','CP Cliente','Profissão Cliente','Nome Referência','Telefone','Idade','Relação','Profissão Ref.','Localidade Ref.','CP Ref.','Patologias','Observações'];
+const COLS=['resultado','comercial','balcao','data_demo','nome_cliente','loc_cliente','cp_cliente','nome','telefone','idade','relacao','profissao','localidade','cp','patologias','obs'];
+const LABELS=['Resultado Demo','Comercial','Balcão','Data Demo','Nome Cliente','Localidade Cliente','CP Cliente','Nome Referência','Telefone','Idade','Relação','Profissão','Localidade Ref.','CP Ref.','Patologias','Observações'];
 
 function exportarCSV(){
   if(!refs.length){ alert('Sem referências para exportar.'); return; }
@@ -570,7 +417,6 @@ function prefixo(){ const d=refs.length>0?refs[0].data_demo:new Date().toISOStri
 function dl(nome,blob){ const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=nome;a.click();URL.revokeObjectURL(u); }
 function fmtData(s){ if(!s)return'—'; const[y,m,d]=s.split('-');return d+'/'+m; }
 
-// Enter shortcuts
 document.getElementById('ref-nome').addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventDefault();document.getElementById('ref-tel').focus();}});
 document.getElementById('ref-tel').addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventDefault();addRef();}});
 </script>
