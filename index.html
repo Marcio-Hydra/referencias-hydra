@@ -361,21 +361,37 @@ async function enviarParaSheets(){
   estado.className='envio-estado envio-loading';
   estado.innerHTML='<span class="spin">⟳</span> A enviar para o Google Sheets...';
 
+  // O id mantém-se entre tentativas: se o envio chegar mais de uma vez, o servidor ignora as repetidas
+  if(!window._idEnvioAtual) window._idEnvioAtual = Date.now().toString()+Math.random().toString(36).slice(2);
   const payload = {
-    id_envio: Date.now().toString()+Math.random().toString(36).slice(2),
+    id_envio: window._idEnvioAtual,
     refs: refs
   };
 
   try {
-    await fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
+    let ultimoErro=null;
+    for(let tentativa=1; tentativa<=3; tentativa++){
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        ultimoErro=null; break;
+      } catch(e) {
+        ultimoErro=e;
+        if(tentativa<3){
+          estado.innerHTML='<span class="spin">⟳</span> A tentar de novo ('+(tentativa+1)+'/3)...';
+          await new Promise(r=>setTimeout(r,2500));
+        }
+      }
+    }
+    if(ultimoErro) throw ultimoErro;
+    window._idEnvioAtual=null;
 
     estado.className='envio-estado envio-ok';
-    estado.innerHTML=`✅ ${refs.length} referência${refs.length!==1?'s':''} enviada${refs.length!==1?'s':''} para o Google Sheets!`;
+    estado.innerHTML=`✅ ${refs.length} referência${refs.length!==1?'s':''} enviada${refs.length!==1?'s':''} para a Hydra!`;
 
     setTimeout(()=>{
       if(confirm('Referências enviadas com sucesso!\n\nLimpar a lista para o próximo cliente?')){
@@ -386,7 +402,7 @@ async function enviarParaSheets(){
 
   } catch(err) {
     estado.className='envio-estado envio-err';
-    estado.innerHTML='❌ Erro de rede. Verifica a ligação e tenta de novo.';
+    estado.innerHTML='❌ Sem ligação. Os dados estão guardados no telemóvel. Tenta de novo quando tiveres rede — não cria duplicados.';
   }
 
   btn.disabled=false;
